@@ -1,12 +1,10 @@
 #!/bin/bash
 
-sudo apt update;
-sudo apt  full-upgrade -y;
+sudo apt update && sudo apt  full-upgrade -y;
 sudo mv php-reverse-shell.php /opt/;
 wget 'https://github.com/RustScan/RustScan/releases/download/2.0.1/rustscan_2.0.1_amd64.deb';
 sudo dpkg -i rustscan_2.0.1_amd64.deb;
-sudo apt install python3-pip -y && sudo pip3 install colorama pyfiglet pyperclip;
-sudo pip3 install git+https://github.com/calebstewart/pwncat.git;
+sudo apt install python3-pip -y && sudo pip3 install colorama pyfiglet pyperclip git+https://github.com/calebstewart/pwncat.git;
 sudo wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar;
 sudo mv stegsolve.jar /opt/.stegsolve.jar;
 sudo gem install zsteg;
