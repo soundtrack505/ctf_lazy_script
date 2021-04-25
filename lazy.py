@@ -20,9 +20,10 @@ def main(attacker_ip, target_ip, file_save):
     space = "                   "
     try:
         print(yellow + pyfiglet.figlet_format("ctf  lazy  script"))
-        print("Your IP is: " + green + str({attacker_ip}) + normal)
-        print("\nTarget ip: " + red + str({target_ip}) + '\n' + normal)
-        print("Your path: " + yellow + os.popen("pwd").read() + normal)
+        print("Your IP is: " + green + attacker_ip + normal)
+        print("\nTarget ip: " + red + target_ip + '\n' + normal)
+        print("Your files will be save here: " + yellow + file_save + "\n" + normal)
+        print("Your current path is: " + blue + os.popen('pwd').read() + normal)
         option_choose = input(f"""{red}0:{normal}  exit 
 {green}1:{normal}  Port Enumeration {space} {green}12:{normal} SMB
 {green}2:{normal}  Web {space}              {green}13:{normal} WPscan
@@ -104,7 +105,7 @@ def main(attacker_ip, target_ip, file_save):
 
 
 def metasploit(target_ip):
-    print(error + pyfiglet.figlet_format("Metasploit") + normal)
+    print(red + pyfiglet.figlet_format("Metasploit") + normal)
     print(green + "Starting metasploit" + normal)
     os.system(f"""terminator -T 'Metasploit-Framework' -e 'msfconsole -x "setg RHOST {target_ip};setg LHOST {attacker_ip}"'""")
     main(attacker_ip, target_ip, file_save)
@@ -704,7 +705,6 @@ def ssh_connect(target_ip):
 
 
 def forensics(file_save):
-    # Add file command (wild card will work)
     os.system(f"ls -l {file_save}/ | file *")
     menu = input(yellow + "0: Back to main menu\n" + normal + "1: JPG photo investigate\n2: PNG photo investigate\n3: Change photo's hex code\n4: Check colors of the photo\n5: BinWalk\n> ")
     if menu == '0':
@@ -742,7 +742,7 @@ def forensics(file_save):
     elif menu == '4':
         os.system('ls -la')
         file_name = input("Enter file name > ")
-        os.system(f"""terminator -T 'StegSolver' -e 'java -jar /bin/stegsolver.jar {file_save}/{file_name};echo "\n\033[1;33mPress ENTER to continue";read'""")
+        os.system(f"""terminator -T 'StegSolver' -e 'java -jar /opt/.stegsolve.jar {file_save}/{file_name};echo "\n\033[1;33mPress ENTER to continue";read'""")
         main(attacker_ip, target_ip, file_save)
 
     elif menu == '5':
@@ -949,7 +949,3 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print(yellow + pyfiglet.figlet_format("\nGood  bye"))
         sys.exit()
-
-    '''
-    Add in wpscan an option for a specific user name and add joomscan? if yes add to setup joomscan and change the title to CMS Enum.
-    '''
