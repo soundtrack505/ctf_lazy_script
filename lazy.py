@@ -437,6 +437,8 @@ def ftp_connect(target_ip):
         destination = input("Where do you want to upload to? > ")
         user_name = input("Enter user name > ")
         password = input("Enter password                         --For anonymous login press enter.\n> ")
+        if password == '':
+            password = "anonymous"
         print(green + "Uploading...")
         os.system(f"""terminator -T 'FTP Upload File' -e 'ftp-upload -h {target_ip} -u {user_name} --password {password} -d {destination} {file_to_upload};echo "\n\033[1;33mPress ENTER to continue";read'""")
 
