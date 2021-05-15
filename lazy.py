@@ -1,5 +1,6 @@
 #!/bin/python3
 """
+
 Created by Yerom Hemo
 date: 24-01-2021
 
@@ -24,7 +25,7 @@ def main(attacker_ip, target_ip, file_save):
         print("\nTarget ip: " + red + target_ip + '\n' + normal)
         print("Your files will be save here: " + yellow + file_save + "\n" + normal)
         print("Your current path is: " + blue + os.popen('pwd').read() + normal)
-        option_choose = input(f"""{red}0:{normal}  exit 
+        option_choose = input(f"""{red}0:{normal}  exit
 {green}1:{normal}  Port Enumeration {space} {green}12:{normal} SMB
 {green}2:{normal}  Web {space}              {green}13:{normal} WPscan
 {green}3:{normal}  ftp
@@ -707,7 +708,9 @@ def ssh_connect(target_ip):
 
 
 def forensics(file_save):
+    print(f"\n{yellow}Files in folder: {normal}")
     os.system(f"ls -l {file_save}/ | file *")
+    print("\n")
     menu = input(yellow + "0: Back to main menu\n" + normal + "1: JPG photo investigate\n2: PNG photo investigate\n3: Change photo's hex code\n4: Check colors of the photo\n5: BinWalk\n> ")
     if menu == '0':
         main(attacker_ip, target_ip, file_save)
@@ -951,3 +954,10 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print(yellow + pyfiglet.figlet_format("\nGood  bye"))
         sys.exit()
+
+    '''
+    Add in wpscan an option for a specific user name and add joomscan? if yes add to setup joomscan and change the title to CMS Enum.
+    Add an option for tls skipping (-k) in gobuster
+    Add an option for stabilaizing nc shell(?) Fuck it Yeah-  input("Please make sure that you nc listiner was the last window you clicked on...\nPress enter to continue")
+    Add a section for sqlmap? maby later...
+    '''
