@@ -4,6 +4,8 @@
 Created by Yerom Hemo
 date: 24-01-2021
 
+This script is coming to automate the common command you type when playing CTF like nmap, gobuster, steghide, ftp, ssh, etc....
+
 """
 
 import sys
@@ -15,6 +17,8 @@ from colorama import Fore, Back
 import pyfiglet
 import pyperclip
 import pty
+import nc_shell
+import steb_shell
 
 
 def main(attacker_ip, target_ip, file_save):
@@ -28,7 +32,7 @@ def main(attacker_ip, target_ip, file_save):
         option_choose = input(f"""{red}0:{normal}  exit
 {green}1:{normal}  Port Enumeration {space} {green}12:{normal} SMB
 {green}2:{normal}  Web {space}              {green}13:{normal} WPscan
-{green}3:{normal}  ftp
+{green}3:{normal}  Ftp
 {green}4:{normal}  Reverse Shell and Listener
 {green}5:{normal}  See Scans Results
 {green}6:{normal}  Forensic
@@ -108,7 +112,7 @@ def main(attacker_ip, target_ip, file_save):
 def metasploit(target_ip):
     print(red + pyfiglet.figlet_format("Metasploit") + normal)
     print(green + "Starting metasploit" + normal)
-    os.system(f"""terminator -T 'Metasploit-Framework' -e 'msfconsole -x "setg RHOST {target_ip};setg LHOST {attacker_ip}"'""")
+    os.system(f"""terminator -T 'Metasploit-Framework' -e 'msfconsole -x "setg RHOSTS {target_ip};setg RHOST {target_ip};setg LHOST {attacker_ip}"'""")
     main(attacker_ip, target_ip, file_save)
 
 
@@ -163,7 +167,7 @@ def interactive_shell():
 
 def web_enum(target_ip):
     print(red + pyfiglet.figlet_format(" Web  Enumeration ") + normal)
-    menu = input(yellow + "What do you want to do?\n" + normal + "0: Back to main menu\n1: web enumeration\n2: Open web server page\n3: Open GTFOBins\n4: Open CyberChef\n5: Open CreackStation\n6: Edit hosts file\n> ")
+    menu = input(yellow + "What do you want to do?\n" + normal + "0: Back to main menu\n1: web enumeration\n2: Open web server page\n3: Open GTFOBins\n4: Open CyberChef\n5: Open CreackStation\n6: Edit /etc/hosts file\n> ")
 
     if menu == '0':
         main(attacker_ip, target_ip, file_save)
@@ -509,7 +513,7 @@ def smb(target_ip, file_save):
 
 def reverse_shell(attacker_ip):
     port = input(green + "Enter the port you want to listen on > " + normal)
-    menu = input(yellow + "What do you need?\n" + normal + "0: Back to main menu\n1: Reverse Shell\n2: Listener\n> ")
+    menu = input(yellow + "What do you need?\n" + normal + "0: Back to main menu\n1: Reverse Shell\n2: Listener\n3: NetCat Stebilize Shell\n> ")
 
     if menu == '0':
         main(attacker_ip, target_ip, file_save)
@@ -527,7 +531,8 @@ def reverse_shell(attacker_ip):
                 listener_menu = input(
                     yellow + "What listener do you need?\n" + normal + "1: netcat listener\n2: pwncat listener\n> ")
                 if listener_menu == '1':
-                    os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    #os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    nc_shell.main(port)
 
                 elif listener_menu == '2':
                     os.system(f"terminator -e 'pwncat -lp {port}'")
@@ -541,7 +546,8 @@ def reverse_shell(attacker_ip):
                 print(green + f"your listening ip {attacker_ip}")
                 listener_menu = input(yellow + "What listener do you need?\n" + normal + "1: netcat listener\n2: pwncat listener\n> ")
                 if listener_menu == '1':
-                    os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    #os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    nc_shell.main(port)
 
                 elif listener_menu == '2':
                     os.system(f"terminator -T 'PwnCat' -e 'pwncat -lp {port}'")
@@ -555,7 +561,8 @@ def reverse_shell(attacker_ip):
                 print(green + f"your listening ip {attacker_ip}")
                 listener_menu = input(yellow + "What listener do you need?\n" + normal + "1: netcat listener\n2: pwncat listener\n> ")
                 if listener_menu == '1':
-                    os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    #os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    nc_shell.main(port)
 
                 elif listener_menu == '2':
                     os.system(f"terminator -T 'PwnCat' -e 'pwncat -lp {port}'")
@@ -569,10 +576,12 @@ def reverse_shell(attacker_ip):
                 print(green + f"your listening ip {attacker_ip}")
                 listener_menu = input(yellow + "What listener do you need?\n" + normal + "1: netcat listener\n2: pwncat listener\n> ")
                 if listener_menu == '1':
-                    os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    #os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    nc_shell.main(port)
 
                 elif listener_menu == '2':
                     os.system(f"terminator -T 'PwnCat' -e 'pwncat -lp {port}'")
+
         elif shell_menu == '5':
             os.system("cat /opt/php-reverse-shell.php | xclip -selection clipboard")
             print(green + "[+] Copied to your clipboard" + normal)
@@ -582,7 +591,8 @@ def reverse_shell(attacker_ip):
                 print(green + f"your listening ip {attacker_ip}")
                 listener_menu = input(yellow + "What listener do you need?\n" + normal + "1: netcat listener\n2: pwncat listener\n> ")
                 if listener_menu == '1':
-                    os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    #os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    nc_shell.main(port)
 
                 elif listener_menu == '2':
                     os.system(f"terminator -T 'PwnCat' -e 'pwncat -lp {port}'")
@@ -596,7 +606,8 @@ def reverse_shell(attacker_ip):
                 print(green + f"your listening ip {attacker_ip}")
                 listener_menu = input(yellow + "What listener do you need?\n" + normal + "1: netcat listener\n2: pwncat listener\n> ")
                 if listener_menu == '1':
-                    os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    #os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+                    nc_shell.main(port)
 
                 elif listener_menu == '2':
                     os.system(f"terminator -T 'PwnCat' -e 'pwncat -lp {port}'")
@@ -606,10 +617,14 @@ def reverse_shell(attacker_ip):
         print(green + f"your listening ip {attacker_ip}")
         listener_menu = input(yellow + "What listener do you need?\n" + normal + "1: netcat listener\n2: pwncat listener\n> ")
         if listener_menu == '1':
-            os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+            #os.system(f"terminator -T 'NetCat' -e 'nc -lnvp {port}'")
+            nc_shell.main(port)
 
         elif listener_menu == '2':
             os.system(f"terminator -T 'PwnCat' -e 'pwncat -lp {port}'")
+
+    elif menu == '3':
+        steb_shell.main()
 
     main(attacker_ip, target_ip, file_save)
 
@@ -747,7 +762,7 @@ def forensics(file_save):
     elif menu == '4':
         os.system('ls -la')
         file_name = input("Enter file name > ")
-        os.system(f"""terminator -T 'StegSolver' -e 'java -jar /opt/.stegsolve.jar {file_save}/{file_name};echo "\n\033[1;33mPress ENTER to continue";read'""")
+        os.system(f"""terminator -T 'StegSolver' -e 'java -jar /opt/.stegsolve.jar {file_save}/{file_name}'""")
         main(attacker_ip, target_ip, file_save)
 
     elif menu == '5':
@@ -765,7 +780,7 @@ def forensics(file_save):
 
 
 def results(file_save):
-    menu = input("What do you want to do?\n0: Back to main menu\n1: Nmap results\n2: Gobuster results\n3: SMB scan result\n4: WPscan results\n> ")
+    menu = input("What do you want to do?\n0: Back to main menu\n1: Nmap results\n2: Web scan results\n3: SMB scan result\n4: WPscan results\n> ")
     if menu == '0':
         main(attacker_ip, target_ip, file_save)
     elif menu == '1':
