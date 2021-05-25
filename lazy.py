@@ -624,6 +624,7 @@ def reverse_shell(attacker_ip):
             os.system(f"terminator -T 'PwnCat' -e 'pwncat -lp {port}'")
 
     elif menu == '3':
+        input("Please make sure that you nc listiner was the last window you clicked on...\nPress enter to continue")
         steb_shell.main()
 
     main(attacker_ip, target_ip, file_save)
@@ -973,6 +974,5 @@ if __name__ == '__main__':
     '''
     Add in wpscan an option for a specific user name and add joomscan? if yes add to setup joomscan and change the title to CMS Enum.
     Add an option for tls skipping (-k) in gobuster
-    Add an option for stabilaizing nc shell(?) Fuck it Yeah-  input("Please make sure that you nc listiner was the last window you clicked on...\nPress enter to continue")
     Add a section for sqlmap? maby later...
     '''
