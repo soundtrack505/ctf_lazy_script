@@ -513,6 +513,17 @@ def smb(target_ip, file_save):
 
 def reverse_shell(attacker_ip):
     port = input(green + "Enter the port you want to listen on > " + normal)
+    if int(port) < 1 or int(port) > 65535:
+        print(error + "You can't do that port number" + normal)
+        reverse_shell(attacker_ip)
+
+    elif len(port) > 5:
+        print(error + "You can't do that port number" + normal)
+        reverse_shell(attacker_ip)
+
+    else:
+        pass
+
     menu = input(yellow + "What do you need?\n" + normal + "0: Back to main menu\n1: Reverse Shell\n2: Listener\n3: NetCat Stebilize Shell\n> ")
 
     if menu == '0':
