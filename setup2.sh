@@ -11,7 +11,7 @@ sudo mv stegsolve.jar /opt/.stegsolve.jar;
 sudo gem install zsteg;
 sudo apt install gobuster ftp-upload nmap sshpass xclip metasploit-framework terminator smbclient hexedit steghide enum4linux vim binwalk hydra wpscan -y;
 sudo mkdir /opt/wordlist;
-sudo cp /usr/share/wordlist/dirbuster/directory-list-2.3-medium.txt /opt/wordlist/directory-list-2.3-medium.txt;
+sudo mv ./directory-list-2.3-medium.txt /opt/wordlist/directory-list-2.3-medium.txt;
 sudo apt autoremove -y;
 
 echo '[+] Done!'
