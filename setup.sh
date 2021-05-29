@@ -11,10 +11,12 @@ sudo gem install zsteg;
 sudo apt install gobuster ftp-upload nmap sshpass xclip metasploit-framework terminator smbclient hexedit steghide enum4linux vim binwalk hydra wpscan -y;
 sudo mkdir /opt/wordlist;
 sudo cp /usr/share/wordlist/dirbuster/directory-list-2.3-medium.txt /opt/wordlist/directory-list-2.3-medium.txt;
-mkdir ~/.local/lib/python3.9/site-packages/nc_shell && mkdir ~/.local/lib/python3.9/site-packages/steb_shell;
-sudo mv nc_shell.py ~/.local/lib/python3.9/site-packages/nc_shell/__init__.py && mv steb_shell ~/.local/lib/python3.9/site-packages/steb_shell/__init__.py;
-sudo mv ./lazy.py /bin/lazy;sudo chmod +x /bin/lazy;
+sudo mkdir /opt/.ctf_lazy_script && sudo mv lazy.py /opt/.ctf_lazy_script/ && sudo mv nc_shell.py /opt/.ctf_lazy_script/ && sudo mv steb_shell.py /opt/.ctf_lazy_script/;
+sudo echo '#!/bin/bash' > /bin/lazy && echo '/opt/.ctf_lazy_script/lazy.py' >> /bin/lazy
+#mkdir ~/.local/lib/python3.9/site-packages/nc_shell && mkdir ~/.local/lib/python3.9/site-packages/steb_shell;
+#sudo mv nc_shell.py ~/.local/lib/python3.9/site-packages/nc_shell/__init__.py && mv steb_shell ~/.local/lib/python3.9/site-packages/steb_shell/__init__.py;
+#sudo mv ./lazy.py /bin/lazy;sudo chmod +x /bin/lazy;
 sudo apt autoremove -y;
 clear;
 
-echo '[+] Done!\nUse it with the command "lazy"'
+echo '[+] Done! You may delete this folder\nUse it with the command "lazy"'
