@@ -524,7 +524,7 @@ def reverse_shell(attacker_ip):
     else:
         pass
 
-    menu = input(yellow + "What do you need?\n" + normal + "0: Back to main menu\n1: Reverse Shell\n2: Listener\n3: NetCat Stebilize Shell\n> ")
+    menu = input(yellow + "What do you need?\n" + normal + "0: Back to main menu\n1: Reverse Shell\n2: Listener\n3: NetCat Stebilize Shell                                      -- Only Works on Linux Reverse Shells\n> ")
 
     if menu == '0':
         main(attacker_ip, target_ip, file_save)
@@ -635,7 +635,7 @@ def reverse_shell(attacker_ip):
             os.system(f"terminator -T 'PwnCat' -e 'pwncat -lp {port}'")
 
     elif menu == '3':
-        input("Please make sure that you nc listiner was the last window you clicked on...\nPress enter to continue")
+        input(yellow + f"Please make sure that you nc listiner was the last window you clicked on...{normal}\nPress enter to continue")
         steb_shell.main()
 
     main(attacker_ip, target_ip, file_save)
