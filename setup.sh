@@ -10,7 +10,7 @@ sudo mv stegsolve.jar /opt/.stegsolve.jar;
 sudo gem install zsteg;
 sudo apt install gobuster ftp-upload nmap sshpass xclip metasploit-framework terminator smbclient hexedit steghide enum4linux vim binwalk hydra wpscan -y;
 sudo mkdir /opt/wordlist;
-sudo cp /usr/share/wordlist/dirbuster/directory-list-2.3-medium.txt /opt/wordlist/directory-list-2.3-medium.txt;
+sudo mv ./dirbuster/directory-list-2.3-medium.txt /opt/wordlist/directory-list-2.3-medium.txt;
 sudo mkdir /opt/.ctf_lazy_script && sudo mv lazy.py /opt/.ctf_lazy_script/ && sudo mv nc_shell.py /opt/.ctf_lazy_script/ && sudo mv steb_shell.py /opt/.ctf_lazy_script/;
 sudo mv lazy /bin/lazy && sudo chmod +x /bin/lazy;
 sudo apt autoremove -y;
