@@ -10,7 +10,13 @@ Please support the actually creators of the tools.
 
 
 # Installation
- chmod +x setup.sh && sudo ./setup.sh
+File: setup.sh
+The file setup.sh is meant for making the installation more easy.
+ $ chmod +x setup.sh && sudo ./setup.sh
+
+ File: setup.sh
+ The file setup2.sh is meant for people who want to use the scrpit from the directory itself.
+ $ chmod +x setup2.sh && sudo ./setup2.sh
 
 # Usage
 $ lazy
