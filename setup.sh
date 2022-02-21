@@ -12,7 +12,7 @@ sudo apt install gobuster ftp-upload nmap sshpass xclip metasploit-framework ter
 sudo mkdir /opt/wordlist;
 sudo mv ./directory-list-2.3-medium.txt /opt/wordlist/directory-list-2.3-medium.txt;
 sudo mkdir /opt/.ctf_lazy_script && sudo mv lazy.py /opt/.ctf_lazy_script/ && sudo mv nc_shell.py /opt/.ctf_lazy_script/ && sudo mv steb_shell.py /opt/.ctf_lazy_script/;
-sudo mv lazy /bin/lazy && sudo chmod +x /bin/lazy;
+echo "alias lazy='python3 /opt/.ctf_lazy_script/lazy.py'";
 sudo apt autoremove -y;
 clear;
 
